@@ -1,21 +1,29 @@
 <body style="margin-top: 20px">
     <form action="" method="post">
         <fieldset>
-            <input type="text" name="Bytes" id="day" />
-            <label for="day">Size in Bytes</label>
+            <input #box name="Bytes" id="bytes" [(ngModel)] = 'byteSize'/>
+            <label for="bytes">Size in Bytes</label>
         </fieldset>
         <fieldset>
-            <input type="text" name="Functions" id="hour" />
-            <label for="hour">Hash Functions</label>
+            <input #box name="Functions" id="functions" [(ngModel)] = 'hashFunctions'/>
+            <label for="functions">Hash Functions</label>
         </fieldset>
     </form>
     <button class="w3-button w3-red w3-round-small" style=" margin-right: 10px;" (click)="newFilter()">New</button>
-    <p *ngIf="bloomFilterArray">{{bloomFilterArray}}</p>
+    <hr>
+    <p> Bloom Filter: {{bloomFilterArray? bloomFilterArray: 'N/A'}}</p>
+    <p> Hash Functions: {{hashFunctions}}</p>
+    <p> Byte Size: {{byteSize}}</p>
+    <hr>
     <form action="" method="post">
         <fieldset>
-            <input type="text" name="Bytes" id="day" />
-            <label for="day">Add Text</label>
+            <input #box name="Add Text" id="add" [(ngModel)] = 'addText' [disabled]="!filterActive"/>
+            <label for="add">Add Text</label>
         </fieldset>
     </form>
-    <button class="w3-button w3-red w3-round-small" style=" margin-right: 10px;" (click)="addWord()">Add</button>
+    <button class="w3-button w3-orange w3-round-small" style=" margin-right: 10px;" (click)="addTextToFilter()" [disabled]="!filterActive" >Add</button>
+    <hr>
+    <div *ngFor="let word of wordsAdded">
+        <p>{{word}}</p>
+    </div>
 </body>
