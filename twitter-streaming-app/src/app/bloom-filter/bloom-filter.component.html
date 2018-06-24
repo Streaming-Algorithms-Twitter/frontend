@@ -1,0 +1,21 @@
+<body style="margin-top: 20px">
+    <form action="" method="post">
+        <fieldset>
+            <input type="text" name="Bytes" id="day" />
+            <label for="day">Size in Bytes</label>
+        </fieldset>
+        <fieldset>
+            <input type="text" name="Functions" id="hour" />
+            <label for="hour">Hash Functions</label>
+        </fieldset>
+    </form>
+    <button class="w3-button w3-red w3-round-small" style=" margin-right: 10px;" (click)="newFilter()">New</button>
+    <p *ngIf="bloomFilterArray">{{bloomFilterArray}}</p>
+    <form action="" method="post">
+        <fieldset>
+            <input type="text" name="Bytes" id="day" />
+            <label for="day">Add Text</label>
+        </fieldset>
+    </form>
+    <button class="w3-button w3-red w3-round-small" style=" margin-right: 10px;" (click)="addWord()">Add</button>
+</body>
