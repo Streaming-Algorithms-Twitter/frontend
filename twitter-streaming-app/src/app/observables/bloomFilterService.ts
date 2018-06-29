@@ -28,39 +28,29 @@ export class BloomFilterService {
     }
 
     public getBloomInit(bytes: number, hashFunctions: number): Observable<any> {
-        if (!bytes || typeof (bytes) !== 'number' || !hashFunctions || typeof (hashFunctions) !== 'number') {
+        if (!bytes || !hashFunctions) {
             // dummy stuff. should be of([]);
-            return of([0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,1,0]);
+            return of({state:'Failed'});
         }
         let url: string = 'http://localhost:5000/search-algorithms/bloom-filter/manual/init/' + bytes + '/' + hashFunctions;
         return this.pipeHttpRequest(this.httpclient.get<any>(url));
     }
 
     public postBloomAddUpdate(addTerm: string): any {
-        if (!addTerm || typeof (addTerm) !== 'string') {
+        if (!addTerm) {
             // dummy stuff. should be of([]);
-            return of([0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,1,0]);
+            return of({state:'Failed'});
         }
-        let url: string = 'http://localhost:5000/search-algorithms/bloom-filter/manual/add/';
-        return this.pipeHttpRequest(this.httpclient.post<any>(url, addTerm));
+        let url: string = 'http://localhost:5000/search-algorithms/bloom-filter/manual/add/'+addTerm;
+        return this.pipeHttpRequest(this.httpclient.get<any>(url));
+        // return this.pipeHttpRequest(this.httpclient.post<any>(url, addTerm));
     }
 
     public getCheckString(checkTerm: string): Observable<any> {
-        if (!checkTerm || typeof (checkTerm) !== 'string') {
-            return of([]);
+        if (!checkTerm) {
+            return of({state:'Failed'});
         }
-        console.log('Hello');
-        let url: string = 'https://api.coindesk.com/v1/bpi/currentprice.json';
-        return this.httpclient.get<any>(url)
-    }
-
-    // A sample request to test observable setup.
-    public sampleString(checkTerm: string): Observable<any> {
-        if (!checkTerm || typeof (checkTerm) !== 'string') {
-            return of([]);
-        }
-        console.log('Hello');
-        let url: string = 'https://api.coindesk.com/v1/bpi/currentprice.json';
-        return this.httpclient.get<any>(url)
+        let url: string = 'http://localhost:5000/search-algorithms/bloom-filter/manual/add/'+checkTerm;
+        return this.httpclient.get<any>(url);
     }
 }
