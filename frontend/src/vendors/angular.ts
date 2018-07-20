@@ -1,6 +1,7 @@
-import "@angular/platform-browser";
-import "@angular/core";
-import "@angular/common";
-import "@angular/http";
-import "@angular/router";
-import "rxjs";
+
+import '@angular/common';
+import '@angular/core';
+import '@angular/http';
+import '@angular/platform-browser';
+import '@angular/router';
+import 'rxjs';

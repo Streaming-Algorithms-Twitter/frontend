@@ -1,27 +1,23 @@
-import { Injectable } from "@angular/core";
-import { Observable, throwError } from "rxjs";
-import { catchError } from "rxjs/operators";
-import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class ApiService {
 
-    private readonly apiUrl: string = "/api/";
+    private readonly apiUrl: string = '/api/';
     private headers: HttpHeaders = new HttpHeaders({
-        'Content-Type': 'application/json',
         'Accept': 'application/json',
+        'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest'
     });
 
     constructor(private http: HttpClient) {
     }
 
-    private getApiUrlFromEndpoint(endpoint: string): string {
-        return this.apiUrl + ApiService.removeTrailingSlash(endpoint);
-    }
-
     private static removeTrailingSlash(path: string): string {
-        if (path && path.startsWith("/"))
+        if (path && path.startsWith('/'))
             path = path.substring(1);
         return path;
     }
@@ -75,7 +71,7 @@ export class ApiService {
 
     public patch(path: string, data?: any): Promise<any> {
         let options = { headers: this.headers };
-        return this.http.patch(this.getApiUrlFromEndpoint(path), data != null ? JSON.stringify(data) : undefined, options)
+        return this.http.patch(this.getApiUrlFromEndpoint(path), data != undefined ? JSON.stringify(data) : undefined, options)
             .pipe(catchError(ApiService.handleError))
             .toPromise();
     }
@@ -85,6 +81,10 @@ export class ApiService {
         return this.http.delete(this.getApiUrlFromEndpoint(path), options)
             .pipe(catchError(ApiService.handleError))
             .toPromise();
+    }
+
+    private getApiUrlFromEndpoint(endpoint: string): string {
+        return this.apiUrl + ApiService.removeTrailingSlash(endpoint);
     }
 
 }

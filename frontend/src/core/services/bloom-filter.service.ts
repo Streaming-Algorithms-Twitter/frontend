@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable()
@@ -15,17 +14,6 @@ export class BloomFilterService {
         this.byteSize = 1024;
         this.addText = '';
      }
-
-    private pipeHttpRequest(httpRequest: Observable<any>): Observable<any> {
-        return httpRequest.pipe(
-            catchError(this.handleError)
-        );
-    }
-
-    private handleError(error: any): Promise<any> {
-        console.error('An error occurred', JSON.stringify(error));
-        return Promise.reject(error);
-    }
 
     public getBloomInit(bytes: number, hashFunctions: number): Observable<any> {
         if (!bytes || typeof (bytes) !== 'number' || !hashFunctions || typeof (hashFunctions) !== 'number') {
@@ -62,5 +50,17 @@ export class BloomFilterService {
         console.log('Hello');
         let url: string = 'https://api.coindesk.com/v1/bpi/currentprice.json';
         return this.httpclient.get<any>(url)
+    }
+
+
+    private pipeHttpRequest(httpRequest: Observable<any>): Observable<any> {
+        return httpRequest.pipe(
+            catchError(this.handleError)
+        );
+    }
+
+    private handleError(error: any): Promise<any> {
+        console.error('An error occurred', JSON.stringify(error));
+        return Promise.reject(error);
     }
 }

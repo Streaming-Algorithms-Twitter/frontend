@@ -1,0 +1,42 @@
+{
+    "rules": {
+        // The 'this' keyword can only be used inside of classes.
+        "no-invalid-this": true,
+        // Empty blocks are almost never needed. Allow the one general exception: empty catch blocks.
+        "no-empty": [
+            true,
+            "allow-empty-catch"
+        ],
+        // Multi-line object liiterals and function calls should have a trailing comma. This helps avoid merge conflicts.
+        // Disallow duplicate imports in the same file.
+        "no-duplicate-imports": true,
+        "no-var-keyword": true,
+        "no-empty-interface": {
+            "severity": "warning"
+        },
+        "trailing-comma": {
+            "severity": "warning"
+        },
+        "ordered-imports": true,
+        "object-literal-sort-keys": true,
+        "only-arrow-functions": true,
+        "member-access": false,
+        "member-ordering": [
+            true,
+            {
+                "order": "fields-first"
+            }
+        ],
+        "quotemark": [
+            true,
+            "single",
+            "avoid-escape"
+        ],
+        "variable-name": [
+            true,
+            "ban-keywords"
+        ],
+        "no-null-keyword": true
+    },
+    "defaultSeverity": "error"
+}

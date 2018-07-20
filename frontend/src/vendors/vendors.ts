@@ -1,3 +1,3 @@
-import "./angular";
-import "./tether";
-import "./bootstrap";
+import './angular';
+import './bootstrap';
+import './tether';

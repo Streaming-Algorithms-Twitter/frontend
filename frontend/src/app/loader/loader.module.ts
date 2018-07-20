@@ -1,19 +1,19 @@
-import {NgModule} from "@angular/core";
+import {NgModule} from '@angular/core';
 
-import {SharedModule} from "../../shared/shared.module";
-import { LoaderComponent } from "./loader.component";
+import {SharedModule} from '../../shared/shared.module';
+import { LoaderComponent } from './loader.component';
 
 @NgModule({
-    imports: [
-        SharedModule
-    ],
     declarations: [
         LoaderComponent
     ],
     exports: [
         LoaderComponent
     ],
-    providers: [],
+    imports: [
+        SharedModule
+    ],
+    providers: []
 })
 export class LoaderModule {
 }

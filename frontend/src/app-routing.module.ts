@@ -1,19 +1,19 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
     {
-        path: '',
-        loadChildren: './features/welcome/welcome.module#WelcomeModule'
+        loadChildren: './features/welcome/welcome.module#WelcomeModule',
+        path: ''
     },
     {
-        path: 'bloom-filter',
-        loadChildren: './features/bloom-filter/bloom-filter.module#BloomFilterModule'
+        loadChildren: './features/bloom-filter/bloom-filter.module#BloomFilterModule',
+        path: 'bloom-filter'
     },
     {
         path: '**',
-        redirectTo: '/',
-        pathMatch: 'full'
+        pathMatch: 'full',
+        redirectTo: '/'
     }
 ];
 
@@ -21,10 +21,10 @@ const routes: Routes = [
  * The root routing module. Other routes can be found next to their respective features.
  */
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule],
-    providers: [],
     declarations: [],
+    exports: [RouterModule],
+    imports: [RouterModule.forRoot(routes)],
+    providers: []
 })
 export class AppRoutingModule {
 }

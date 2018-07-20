@@ -2,12 +2,16 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'inline-loader',
-    templateUrl: 'inline-loader.component.html',
-    styleUrls: ['inline-loader.component.css']
+    styleUrls: ['inline-loader.component.css'],
+    templateUrl: 'inline-loader.component.html'
 })
 
 export class InlineLoaderComponent implements OnInit {
-    constructor() { }
+    constructor() { 
+        return;
+    }
 
-    ngOnInit() { }
+    ngOnInit() { 
+        return;
+    }
 }
