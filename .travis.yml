@@ -5,9 +5,9 @@ jobs:
       python:
         - "3.6"
       install:
-        - pip install -r requirements.txt
+        - pip install -r "backend/requirements.txt"
       script:
-        - python -m py_compile endpoint.py
+        - python -m py_compile "backend/endpoint.py"
 
     - stage: test
       language: node_js
