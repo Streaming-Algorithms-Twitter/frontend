@@ -1,9 +1,13 @@
+# Stream ML
+Learn Streaming Algorithms Using Twitter Data!
 
-### Getting Started
-You need to install the Angular CLI:
-```
-npm install -g @angular/cli
-cd twitter-streaming-app
-ng serve
-```
-Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+Created by:
+- Mitch Talmadge
+- Tarun Sunkaraneni
+- Mark Van der Merwe
+- JJ Garzella
+
+## Introduction
+This repository is split into two; an Angular 6 frontend web application, and a Python 3 backend framework.
+
+For specific information on how to contribute to or run each part of the application, view the READMEs in their respective folders.

@@ -1,0 +1,75 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a [routerLink]="['/']">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active">Bloom Filter</li>
+                </ol>
+            </nav>
+            <h1>Bloom Filter</h1>
+            <hr />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <h2>Create a Filter</h2>
+            <form>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="bytes">Size in Bytes</label>
+                            <input name="Bytes" id="bytes" class="form-control" [(ngModel)]='byteSize' />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="functions">Number of Hash Functions</label>
+                            <input name="Functions" id="functions" class="form-control" [(ngModel)]='hashFunctions' />
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <button class="btn btn-primary" (click)="newFilter()">Create Filter</button>
+        </div>
+    </div>
+
+    <div class="row pt-3">
+        <div class="col">
+            <hr />
+
+            <p> Bloom Filter: {{bloomFilterArray? bloomFilterArray: 'N/A'}}</p>
+            <p> Hash Functions: {{hashFunctions}}</p>
+            <p> Byte Size: {{byteSize}}</p>
+            <p> Byte Size: {{bloomFilterArray? (flasePositiveRate? '0%': flasePositiveRate): 'N/A'}}</p>
+        </div>
+    </div>
+
+    <div class="row pt-3">
+        <div class="col">
+            <hr />
+            <h2>Test the Filter</h2>
+            <form>
+                <div class="form-group">
+                    <label for="add">Add Text</label>
+                    <input name="Add Text" id="add" class="form-control" [(ngModel)]='addText' [disabled]="!filterActive" />
+                </div>
+            </form>
+            <button class="btn btn-outline-primary" style=" margin-right: 10px;" (click)="addTextToFilter()" [disabled]="!filterActive">Add</button>
+        </div>
+    </div>
+
+    <div class="row pt-3">
+        <div class="col">
+            <hr />
+            <div *ngFor="let word of wordsAdded">
+                <p>{{word}}</p>
+            </div>
+        </div>
+    </div>
+
+</div>

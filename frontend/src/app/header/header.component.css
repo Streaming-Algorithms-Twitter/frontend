@@ -1,0 +1,14 @@
+#top-accent {
+    width: 100%;
+    height: 10px;
+
+    background: linear-gradient(90deg, #00efff, #b794ff)
+}
+
+nav {
+    height: 80px;
+}
+
+nav .container, nav a, nav img {
+    height: 100%;
+}

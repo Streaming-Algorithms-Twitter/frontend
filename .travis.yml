@@ -1,0 +1,14 @@
+jobs:
+  include:
+    - stage: test
+      language: node_js
+      node_js:
+        - "8"
+      cache:
+        directories:
+          - "frontend/node_modules"
+          - "frontend/.awcache"
+      before_install:
+        - cd frontend
+      script:
+        - npm run build
