@@ -1,4 +1,4 @@
-# Stream ML
+# Streams.ML
 [![Build Status](https://travis-ci.org/Streaming-Algorithms-Twitter/stream-ml.svg?branch=master)](https://travis-ci.org/Streaming-Algorithms-Twitter/stream-ml)
 
 Learn Streaming Algorithms Using Twitter Data!

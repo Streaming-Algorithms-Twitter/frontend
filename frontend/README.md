@@ -1,4 +1,4 @@
-# Stream ML - Frontend
+# Streams.ML - Frontend
 This is the frontend Angular 6 application.
 
 ## Setup
