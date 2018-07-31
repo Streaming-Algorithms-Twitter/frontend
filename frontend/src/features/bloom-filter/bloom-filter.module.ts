@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 
-import { BloomFilterComponent } from './bloom-filter.component';
-import { BloomFilterRoutingModule } from './bloom-filter-routing.module';
 import { SharedModule } from '../../shared/shared.module';
+import { BloomFilterRoutingModule } from './bloom-filter-routing.module';
+import { BloomFilterComponent } from './bloom-filter.component';
 
 @NgModule({
+    declarations: [BloomFilterComponent],
+    exports: [],
     imports: [
         SharedModule,
         BloomFilterRoutingModule
     ],
-    exports: [],
-    declarations: [BloomFilterComponent],
     providers: [],
 })
 export class BloomFilterModule { }

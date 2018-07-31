@@ -3,8 +3,8 @@ import { BloomFilterService } from '../../core/services/bloom-filter.service';
 
 @Component({
   selector: 'bloom-filter',
-  templateUrl: 'bloom-filter.component.html',
-  styleUrls: ['bloom-filter.component.css']
+  styleUrls: ['bloom-filter.component.css'],
+  templateUrl: 'bloom-filter.component.html'
 })
 export class BloomFilterComponent implements OnInit {
 
@@ -23,10 +23,11 @@ export class BloomFilterComponent implements OnInit {
   }
 
   ngOnInit() {
+    return;
   }
 
   public newFilter() {
-    this.service.getBloomInit(null, null).subscribe(data => {
+    this.service.getBloomInit(undefined, undefined).subscribe(data => {
       console.log(data);
       this.bloomFilterArray = data;
     });
