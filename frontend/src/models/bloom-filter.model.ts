@@ -7,7 +7,7 @@ export class BitarrayBloomFilter implements BloomFilter<string>{
     // how many for sure are unique
     private uniqueWords: number;
 
-    private const numBits: number;  
+    private readonly numBits: number;  
 
     // our storage. gotten from https://www.npmjs.com/package/node-bitarray
     private bitarray: BitArray;
@@ -21,10 +21,11 @@ export class BitarrayBloomFilter implements BloomFilter<string>{
     }
 
     public add(newEntry: string): void {
+        this.encountered++;
         let unique: boolean = false;
         for (let i=0; i < this.hashFunctions; i++) {
             let saltString: string = i+newEntry+i;
-            // we can add any transformation of i but we don't care, i did i^2
+            // we can add any transformation of i but it doesn't really matter, i did i^2
             let saltHashValue: number = this.getHashCode(saltString, i*i) % this.numBits;
             if (this.bitarray.get(saltHashValue) == 0) unique = true; // this bit has never been set.
             this.bitarray.set(saltHashValue, 1);
@@ -33,26 +34,37 @@ export class BitarrayBloomFilter implements BloomFilter<string>{
     }    
 
     public check(checkEntry: string): boolean {
-        throw new Error('Method not implemented.');
+        for (let i=0; i < this.hashFunctions; i++) {
+            let saltString: string = i+checkEntry+i;
+            // we can add any transformation of i but it doesn't really matter, i did i^2
+            let saltHashValue: number = this.getHashCode(saltString, i*i) % this.numBits;
+            if (this.bitarray.get(saltHashValue) == 0) return false; // this bit has never been set, so there's no way this string has been seen.
+        }
+        return true; // may be a false positive
     }
 
     public numberEncountered(): number {
-        throw new Error('Method not implemented.');
+        return  this.encountered;
     }
-    public falsePosProb(): number {
-        throw new Error('Method not implemented.');
+
+    // this will require us 
+    public falsePosProb(trulyUnique ?: number): number {
+        // if we aren't provided with this, we'll have to manually use our estimate (which is guranteed to be lower than  or 
+        // equal to actual value)
+        let unqiueNum = trulyUnique ? trulyUnique: this.uniqueWords;
+        return ((1 - 1 / (this.numBits)) ** (this.hashFunctions * unqiueNum)) ** (this.hashFunctions);
     }
 
     public getFilter(): ReadonlyArray<string> {
-        throw new Error('Method not implemented.');
+        return this.bitarray.toArray();
     }
 
     public uniqueEncountered(): number {
-        throw new Error('Method not implemented.');
+        return this.uniqueWords;
     }
 
     public getBytesUsed(): number {
-        throw new Error('Method not implemented.');
+        return this.numBytes;
     }
 
     // this performs exactly as Java hashcode, just added the salt option

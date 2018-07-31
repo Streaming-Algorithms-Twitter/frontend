@@ -3,7 +3,8 @@ export interface BloomFilter<T> {
     check(checkEntry: T): boolean;
     numberEncountered(): number;
     uniqueEncountered(): number;
-    falsePosProb(): number;
+    // this will only be needed for the bitarray bloom filter implementation
+    falsePosProb(trulyUnique: number): number;
     getFilter(): ReadonlyArray<T>;
     getBytesUsed(): number;
 }
