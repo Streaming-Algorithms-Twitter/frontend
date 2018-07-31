@@ -5,4 +5,5 @@ export interface BloomFilter<T> {
     uniqueEncountered(): number;
     falsePosProb(): number;
     getFilter(): ReadonlyArray<T>;
+    getBytesUsed(): number;
 }
