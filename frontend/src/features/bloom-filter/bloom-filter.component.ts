@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BloomFilterService } from '../../core/services/bloom-filter.service';
+import { BitarrayBloomFilter } from '../../models/bloom-filter.model';
+import { IBloomFilter } from '../../models/interfaces/interfaces';
 
 @Component({
   selector: 'bloom-filter',
@@ -9,16 +11,15 @@ import { BloomFilterService } from '../../core/services/bloom-filter.service';
 export class BloomFilterComponent implements OnInit {
 
   public filterActive: boolean;
-
-  public byteSize: number = 0;
+  public numBytes: number = 0;
   public hashFunctions: number = 0;
   public addText: string;
 
-  public bloomFilterArray: ReadonlyArray<any>;
-  public flasePositiveRate: number;
+  public bloomFilter: IBloomFilter<string>;
+  public falsePositiveRate: number;
   public wordsAdded: Set<string>;
 
-  constructor(public service: BloomFilterService) {
+  constructor() {
     this.filterActive = false;
   }
 
@@ -27,22 +28,16 @@ export class BloomFilterComponent implements OnInit {
   }
 
   public newFilter() {
-    this.service.getBloomInit(undefined, undefined).subscribe(data => {
-      console.log(data);
-      this.bloomFilterArray = data;
-    });
-    if (this.bloomFilterArray) {
-      this.filterActive = true;
-      this.wordsAdded = new Set<string>();
-    }
+    this.bloomFilter = new BitarrayBloomFilter(this.hashFunctions, this.numBytes);
+    this.filterActive = true;
+    this.wordsAdded = new Set<string>();
   }
 
   public addTextToFilter() {
-    this.service.postBloomAddUpdate(this.addText).subscribe(data => {
-      console.log(data);
-      // this.flasePositiveRate = data.flasePositiveRate;
-    });
+    this.bloomFilter.add(this.addText);
     this.wordsAdded.add(this.addText);
+    this.addText = '';
+    this.falsePositiveRate = this.bloomFilter.falsePosProb(this.wordsAdded.size);
   }
 
 }

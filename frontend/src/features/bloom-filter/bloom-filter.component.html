@@ -23,7 +23,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="bytes">Size in Bytes</label>
-                            <input name="Bytes" id="bytes" class="form-control" [(ngModel)]='byteSize' />
+                            <input name="Bytes" id="bytes" class="form-control" [(ngModel)]='numBytes' />
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -42,10 +42,10 @@
         <div class="col">
             <hr />
 
-            <p> Bloom Filter: {{bloomFilterArray? bloomFilterArray: 'N/A'}}</p>
+            <p> Bloom Filter: {{bloomFilter? bloomFilter.getFilter(): 'N/A'}}</p>
             <p> Hash Functions: {{hashFunctions}}</p>
             <p> Byte Size: {{byteSize}}</p>
-            <p> Byte Size: {{bloomFilterArray? (flasePositiveRate? '0%': flasePositiveRate): 'N/A'}}</p>
+            <p> False Positive rate: {{bloomFilter? (falsePositiveRate? falsePositiveRate: falsePositiveRate): 'N/A'}}%</p>
         </div>
     </div>
 
@@ -56,10 +56,10 @@
             <form>
                 <div class="form-group">
                     <label for="add">Add Text</label>
-                    <input name="Add Text" id="add" class="form-control" [(ngModel)]='addText' [disabled]="!filterActive" />
+                    <input name="Add Text" id="add" class="form-control" [(ngModel)]='addText' [disabled]="!bloomFilter" />
                 </div>
             </form>
-            <button class="btn btn-outline-primary" style=" margin-right: 10px;" (click)="addTextToFilter()" [disabled]="!filterActive">Add</button>
+            <button class="btn btn-outline-primary" style=" margin-right: 10px;" (click)="addTextToFilter()" [disabled]="!this.addText || this.addText.trim().length == 0">Add</button>
         </div>
     </div>
 
