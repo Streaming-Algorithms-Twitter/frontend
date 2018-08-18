@@ -14,6 +14,7 @@ export class BloomFilterComponent implements OnInit {
   public numBytes: number = 0;
   public hashFunctions: number = 0;
   public addText: string;
+  public byteSize: number = 0;
 
   public bloomFilter: IBloomFilter<string>;
   public falsePositiveRate: number;
